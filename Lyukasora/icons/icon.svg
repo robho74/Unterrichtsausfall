@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Lyukasora">
+  <rect width="512" height="512" rx="112" fill="#1F4BD8"/>
+  <!-- Textmarker-Strich -->
+  <rect x="96" y="318" width="330" height="72" rx="14" fill="#FFE45C" transform="rotate(-6 261 354)"/>
+  <!-- Buchstabe L als Tinte -->
+  <path d="M150 112h70v208h140v66H150z" fill="#FFFFFF"/>
+  <!-- Sprechblasen-Punkte -->
+  <circle cx="318" cy="180" r="18" fill="#FFFFFF" opacity="0.95"/>
+  <circle cx="366" cy="180" r="18" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="414" cy="180" r="18" fill="#FFFFFF" opacity="0.45"/>
+</svg>

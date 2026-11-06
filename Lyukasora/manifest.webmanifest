@@ -1,0 +1,25 @@
+{
+  "name": "Lyukasora – Promptgenerator für die Schule",
+  "short_name": "Lyukasora",
+  "description": "Erzeugt in wenigen Schritten einen Prompt, mit dem eine KI beim Lernen hilft, statt nur Antworten zu liefern. Für Klasse 5 bis 13 am Gymnasium in Niedersachsen.",
+  "lang": "de",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "id": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5F4F0",
+  "theme_color": "#1F4BD8",
+  "categories": ["education", "productivity"],
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    { "src": "icons/screenshot-handy.png", "sizes": "390x844", "type": "image/png", "form_factor": "narrow", "label": "Schritte am Handy" },
+    { "src": "icons/screenshot-desktop.png", "sizes": "1280x800", "type": "image/png", "form_factor": "wide", "label": "Fertiger Prompt am Desktop" }
+  ]
+}

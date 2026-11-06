@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="de" data-modus="schueler">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lyukasora</title>
+<meta name="description" content="Lyukasora erzeugt in wenigen Schritten einen guten Prompt für Schülerinnen und Schüler am Gymnasium: Klasse, Fach, Thema, Format, Lernverstärker.">
+<meta name="theme-color" content="#F5F4F0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1420" media="(prefers-color-scheme: dark)">
+<meta name="application-name" content="Lyukasora">
+<meta name="apple-mobile-web-app-title" content="Lyukasora">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/app.css?v=1.0.3">
+</head>
+<body>
+<a class="skip" href="#hauptinhalt">Zum Inhalt springen</a>
+
+<header class="kopf">
+  <div class="kopf-innen">
+    <a class="marke" href="#" id="marke" aria-label="Lyukasora, zum Anfang">
+      <span class="marke-name">Lyukasora</span>
+      <span class="marke-zeile" id="untertitel">Prompts, die dich zum Denken bringen</span>
+    </a>
+    <nav class="kopf-nav" aria-label="Werkzeuge">
+      <button id="btn-gemerkt" class="icon-btn" type="button" aria-label="Gemerkte Prompts">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z"/></svg>
+      </button>
+      <button id="btn-einstellungen" class="icon-btn" type="button" aria-label="Einstellungen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+      </button>
+    </nav>
+  </div>
+  <nav class="pfad" id="pfad" aria-label="Deine Auswahl" hidden><ol id="pfad-liste"></ol></nav>
+</header>
+
+<main id="hauptinhalt" class="haupt">
+  <div class="intro">
+    <h1>Ein Prompt, der dich schlauer macht.</h1>
+    <p id="einleitung">In fünf Schritten zu einem Prompt, mit dem dir eine KI beim Lernen hilft, statt dir nur Antworten zu liefern.</p>
+  </div>
+
+  <section class="schritt" id="schritt-klasse" aria-labelledby="t-klasse">
+    <h2 class="schritt-titel" id="t-klasse"><span class="schritt-nr" aria-hidden="true">1</span><span class="schritt-titel-text">Ich bin in Klasse …</span></h2>
+    <div class="schritt-inhalt">
+      <div class="raster klassen" id="klassen" role="radiogroup" aria-label="Klassenstufe"></div>
+    </div>
+    <p class="schritt-zusammenfassung" hidden></p>
+  </section>
+
+  <section class="schritt" id="schritt-fach" aria-labelledby="t-fach" hidden>
+    <h2 class="schritt-titel" id="t-fach"><span class="schritt-nr" aria-hidden="true">2</span><span class="schritt-titel-text">Mein Fach</span></h2>
+    <div class="schritt-inhalt">
+      <div class="faecher" id="faecher" role="radiogroup" aria-label="Fach"></div>
+      <div class="feld" id="niveau" hidden></div>
+    </div>
+    <p class="schritt-zusammenfassung" hidden></p>
+  </section>
+
+  <section class="schritt" id="schritt-thema" aria-labelledby="t-thema" hidden>
+    <h2 class="schritt-titel" id="t-thema"><span class="schritt-nr" aria-hidden="true">3</span><span class="schritt-titel-text">Mein Thema</span></h2>
+    <div class="schritt-inhalt">
+      <div class="themen" id="themen" role="radiogroup" aria-label="Thema"></div>
+      <div class="feld" id="thema-frei-box" hidden>
+        <label class="feld-label" for="thema-frei">Anderes Thema</label>
+        <input type="text" id="thema-frei" maxlength="80" autocomplete="off">
+      </div>
+    </div>
+    <p class="schritt-zusammenfassung" hidden></p>
+  </section>
+
+  <section class="schritt" id="schritt-genauer" aria-labelledby="t-genauer" hidden>
+    <h2 class="schritt-titel" id="t-genauer"><span class="schritt-nr" aria-hidden="true">4</span><span class="schritt-titel-text">Worum geht es genau?</span></h2>
+    <div class="schritt-inhalt">
+      <div class="feld">
+        <label class="feld-label" for="genauer" id="genauer-label">Unterthema oder Lernziel</label>
+        <p class="feld-hilfe" id="genauer-hilfe">Ein Satz reicht. Was willst du verstehen oder können?</p>
+        <textarea id="genauer" rows="3" maxlength="600" required></textarea>
+        <p class="hinweis" id="genauer-hinweis" hidden></p>
+      </div>
+      <div class="zwei-felder">
+        <div class="feld">
+          <label class="feld-label" for="vorwissen" id="vorwissen-label">Was weiß ich schon?</label>
+          <input type="text" id="vorwissen" maxlength="300">
+        </div>
+        <div class="feld">
+          <label class="feld-label" for="huerde" id="huerde-label">Wo hänge ich?</label>
+          <input type="text" id="huerde" maxlength="300">
+        </div>
+      </div>
+      <div><button type="button" class="btn primaer" id="btn-weiter-genauer" disabled>Weiter</button></div>
+    </div>
+    <p class="schritt-zusammenfassung" hidden></p>
+  </section>
+
+  <section class="schritt" id="schritt-format" aria-labelledby="t-format" hidden>
+    <h2 class="schritt-titel" id="t-format"><span class="schritt-nr" aria-hidden="true">5</span><span class="schritt-titel-text">Was soll entstehen?</span></h2>
+    <div class="schritt-inhalt">
+      <div class="formate" id="formate" role="radiogroup" aria-label="Format"></div>
+      <div class="feld" id="format-optionen" hidden></div>
+    </div>
+    <p class="schritt-zusammenfassung" hidden></p>
+  </section>
+
+  <section class="schritt" id="schritt-prinzipien" aria-labelledby="t-prinzipien" hidden>
+    <h2 class="schritt-titel" id="t-prinzipien"><span class="schritt-nr" aria-hidden="true">6</span><span class="schritt-titel-text">Wie soll die KI mit mir arbeiten?</span></h2>
+    <div class="schritt-inhalt">
+      <p class="schritt-hilfe" id="prinzipien-hinweis"></p>
+      <div class="prinzipien" id="prinzipien"></div>
+    </div>
+  </section>
+
+  <details class="schritt fein" id="schritt-fein" hidden>
+    <summary>
+      <h2 class="schritt-titel"><span class="schritt-nr" aria-hidden="true">7</span><span class="schritt-titel-text">Feinheiten</span></h2>
+    </summary>
+    <p class="schritt-hilfe" id="fein-hinweis" style="margin-top:0.5rem"></p>
+    <div class="fein" id="fein"></div>
+  </details>
+
+  <section class="ergebnis" id="ergebnis" aria-labelledby="ergebnis-titel" hidden>
+    <div class="ergebnis-kopf">
+      <h2 id="ergebnis-titel">Dein Prompt</h2>
+      <p id="ergebnis-hinweis"></p>
+    </div>
+    <button type="button" class="btn primaer gross" id="btn-kopieren">Prompt kopieren</button>
+    <p class="einsteiger" id="einsteiger"></p>
+    <div class="prompt-box" id="prompt-anzeige" aria-label="Der erzeugte Prompt"></div>
+    <label for="prompt-text" class="visuell-versteckt" hidden>Prompt als Text</label>
+    <textarea id="prompt-text" readonly hidden aria-label="Prompt als Text zum Markieren"></textarea>
+    <p class="prompt-fuss" id="prompt-zeichen"></p>
+    <div class="oeffnen" id="oeffnen"></div>
+    <div class="weiter">
+      <h3 class="block-titel" id="weiter-titel">So machst du weiter</h3>
+      <p class="hinweis sanft" id="weiter-hinweis"></p>
+      <ul class="anschluss" id="anschluss"></ul>
+    </div>
+    <div class="ergebnis-aktionen">
+      <button type="button" class="btn" id="btn-merken">Prompt merken</button>
+      <button type="button" class="btn" id="btn-neu">Neu anfangen</button>
+    </div>
+  </section>
+</main>
+
+<button type="button" class="btn primaer schwebend" id="btn-zum-prompt" hidden>Zu deinem Prompt</button>
+
+<footer class="fuss">
+  <button type="button" id="btn-datenschutz">Datenschutz</button>
+  <button type="button" id="btn-ueber">Über dieses Werkzeug</button>
+  <a href="lernverstaerker.pdf" target="_blank" rel="noopener">Lernverstärker-Blatt (PDF)</a>
+  <span id="version-hinweis"></span>
+</footer>
+
+<dialog class="dialog gross" id="dlg-datenschutz">
+  <div class="dialog-kopf"><h2 class="dialog-titel">Datenschutz</h2><button type="button" class="icon-btn dlg-schliessen" aria-label="Schließen">&#x2715;</button></div>
+  <div class="lang-text">
+    <p>Lyukasora läuft vollständig in deinem Browser. Es gibt keinen Server, der Eingaben empfängt, kein Konto, keine Anmeldung.</p>
+    <h3>Was gespeichert wird</h3>
+    <ul>
+      <li>Nichts wird an den Betreiber dieser Seite übertragen. Es gibt kein Tracking, keine Cookies und keine Analyse-Skripte.</li>
+      <li>Gemerkte Prompts und Einstellungen (zum Beispiel der Link zum Schul-Chatbot oder ein eigener API-Schlüssel) liegen nur im lokalen Speicher deines Browsers auf diesem Gerät. Du kannst sie in den Einstellungen jederzeit löschen.</li>
+      <li>Schriften und Daten sind gebündelt; die Seite lädt zur Laufzeit nichts von fremden Servern.</li>
+    </ul>
+    <h3>Wenn du einen Prompt weitergibst</h3>
+    <ul>
+      <li>Beim Klick auf „In … öffnen“ wird der Prompt Teil der Adresse, die an den gewählten Dienst (zum Beispiel ChatGPT oder Perplexity) übermittelt wird. Ab dann gelten die Datenschutzregeln dieses Anbieters. Schreib deshalb keine Namen, Adressen oder andere persönliche Daten in den Prompt.</li>
+      <li>Das optionale Schlüssel-Modul sendet den Prompt direkt an den Anbieter, dessen Schlüssel du eingetragen hast.</li>
+      <li>Das Experimentierlabor lädt ein Sprachmodell von den Servern des Projekts WebLLM und führt es dann nur auf deinem Gerät aus; deine Eingaben verlassen das Gerät dabei nicht.</li>
+    </ul>
+    <h3>Als installierte App</h3>
+    <p>Wenn du die Seite auf dem Startbildschirm speicherst, legt der Browser eine Kopie der Dateien an, damit sie auch ohne Netz läuft. Auch dabei werden keine Daten übertragen.</p>
+  </div>
+</dialog>
+
+<dialog class="dialog gross" id="dlg-ueber">
+  <div class="dialog-kopf"><h2 class="dialog-titel">Über dieses Werkzeug</h2><button type="button" class="icon-btn dlg-schliessen" aria-label="Schließen">&#x2715;</button></div>
+  <div class="lang-text">
+    <p>Lyukasora baut Prompts für Schülerinnen und Schüler am Gymnasium in Niedersachsen, Klasse 5 bis 13. Die Themen folgen den niedersächsischen Kerncurricula; schulinterne Abweichungen deckt „Anderes Thema“ ab.</p>
+    <p>Jeder Prompt ist so gebaut, dass die KI nicht einfach liefert, sondern dich zum Denken bringt: Sie kennzeichnet Unsicheres, lädt zum Nachfragen ein, stellt Aufgaben auf deinem Niveau und schreibt keine Hausaufgaben fertig.</p>
+    <h3>Die sieben Lernverstärker</h3>
+    <ul>
+      <li>Antwort als Diskussionsgrundlage</li>
+      <li>Eigene These, KI als Sparringspartner</li>
+      <li>Fehler der KI aufspüren</li>
+      <li>Gemeinsam überarbeiten</li>
+      <li>Gegenargumente einholen</li>
+      <li>Verstehen prüfen durch Erklären</li>
+      <li>Aufgaben auf eigenem Niveau</li>
+    </ul>
+    <p>Zwei davon sind in jedem Prompt aktiv. Ein Blatt mit allen sieben zum Aushängen gibt es als PDF im Fuß der Seite.</p>
+    <h3>Grenzen</h3>
+    <p>Das Werkzeug ersetzt keine Lehrkraft und prüft keine Antworten der KI. Es gibt dir einen guten Start und Anschlussfragen; das Prüfen bleibt bei dir.</p>
+    <p>Lehrkräfte finden in den Einstellungen den Lehrkraft-Modus (Unterrichtsplanung, Erwartungshorizont) und können den Chatbot der Schule als ersten Button hinterlegen. Themenliste und Bausteine liegen als JSON-Dateien im Ordner <code>data/</code> und lassen sich ohne Programmierkenntnisse ergänzen; die Anleitung steht in <code>docs/themen.md</code> und <code>docs/bausteine.md</code>.</p>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/filter.js?v=1.0.3"></script>
+<script src="js/daten.js?v=1.0.3"></script>
+<script src="js/assembler.js?v=1.0.3"></script>
+<script src="js/texte.js?v=1.0.3"></script>
+<script src="js/ui.js?v=1.0.3"></script>
+<script src="js/aktionen.js?v=1.0.3"></script>
+<script src="js/einstellungen.js?v=1.0.3"></script>
+<script src="js/pwa.js?v=1.0.3"></script>
+<script src="js/app.js?v=1.0.3"></script>
+</body>
+</html>
