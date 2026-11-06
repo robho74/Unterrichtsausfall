@@ -2,7 +2,7 @@
  * Speichert die App-Dateien für die Offline-Nutzung. Bei einer neuen Version (VERSION ändern)
  * wird der Cache erneuert; die Seite zeigt einen Hinweis „Neue Version verfügbar“.
  */
-var VERSION = 'lyukasora-v1.0.3';
+var VERSION = 'lyukasora-v1.0.4';
 var DATEIEN = [
   './',
   'index.html',

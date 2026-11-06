@@ -7,12 +7,15 @@ LYU.aktionen = (function () {
   /* Direktöffnen-Dienste. Nur Einträge, die bei der Prüfung am 28.09.2026 den Prompt tatsächlich
    * übernommen haben (siehe README, Abschnitt Deep-Link-Prüfung). {prompt} wird URL-kodiert ersetzt.
    * sendet: true = der Dienst schickt den Prompt sofort ab; false = er steht im Eingabefeld.
-   * standard: false = erst in den Einstellungen einschalten. */
+   * standard: false = erst in den Einstellungen einschalten.
+   * Claude (06.11.2026 ergänzt) ist noch nicht im Browser geprüft. Ohne Anmeldung zeigt claude.ai
+   * die Login-Seite und der Prompt geht meist verloren – dann „Prompt kopieren“ nutzen. */
   var ANBIETER = [
+    { id: 'claude', name: 'Claude', url: 'https://claude.ai/new?q={prompt}', alter: 'ab 18, Konto nötig', sendet: false, standard: true, maxZeichen: 6000, konto: true },
     { id: 'chatgpt', name: 'ChatGPT', url: 'https://chatgpt.com/?q={prompt}', alter: 'ab 13, unter 18 mit Erlaubnis der Eltern', sendet: true, standard: true, maxZeichen: 6000, konto: false },
-    { id: 'perplexity', name: 'Perplexity', url: 'https://www.perplexity.ai/search?q={prompt}', alter: 'ab 13, unter 18 mit Erlaubnis der Eltern', sendet: true, standard: true, maxZeichen: 6000, konto: false },
-    { id: 'duckai', name: 'Duck.ai', url: 'https://duckduckgo.com/?q={prompt}&ia=chat&duckai=1', alter: 'ohne Konto, anonym', sendet: false, standard: true, maxZeichen: 6000, konto: false },
-    { id: 'bing', name: 'Copilot-Suche (Bing)', url: 'https://www.bing.com/copilotsearch?q={prompt}', alter: 'ohne Konto', sendet: true, standard: true, maxZeichen: 6000, konto: false },
+    { id: 'perplexity', name: 'Perplexity', url: 'https://www.perplexity.ai/search?q={prompt}', alter: 'ab 13, unter 18 mit Erlaubnis der Eltern', sendet: true, standard: false, maxZeichen: 6000, konto: false },
+    { id: 'duckai', name: 'Duck.ai', url: 'https://duckduckgo.com/?q={prompt}&ia=chat&duckai=1', alter: 'ohne Konto, anonym', sendet: false, standard: false, maxZeichen: 6000, konto: false },
+    { id: 'bing', name: 'Copilot-Suche (Bing)', url: 'https://www.bing.com/copilotsearch?q={prompt}', alter: 'ohne Konto', sendet: true, standard: false, maxZeichen: 6000, konto: false },
     { id: 'grok', name: 'Grok', url: 'https://grok.com/?q={prompt}', alter: 'ab 13 mit Eltern, keine Alterskontrolle', sendet: false, standard: false, maxZeichen: 6000, konto: false }
   ];
   var URL_GRENZE = 6000;
